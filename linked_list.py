@@ -23,7 +23,7 @@ class LinkedList():
 
         ## Add node to front
 
-        if self.head != None:
+        if self.len > 0:
             node.setNext(self.head)
             self.head = node
             self.len += 1
@@ -35,10 +35,14 @@ class LinkedList():
     def addNodeE(self,node):            ## O(1)
 
         ## Add node to end
-
-        self.end.setNext(node)
-        self.end = self.end.next
-        self.len += 1
+        if self.len < 1:
+            self.head = node
+            self.end = node
+            self.len += 1
+        else:
+            self.end.setNext(node)
+            self.end = self.end.next
+            self.len += 1
 
     def addNodeS(self, node, location): ## O(n)
 
@@ -96,7 +100,7 @@ class LinkedList():
                     prev = current
                     current = current.next
 
-    def printList(self):                ## O(n)
+    def print(self):                ## O(n)
         lt = []
         current = self.head
         while True:
@@ -109,12 +113,3 @@ class LinkedList():
 
     def printLen(self):                 ## O(1)
         print (self.len)
-    
-x=Node(1)
-y=Node(2)
-z=Node(3)
-a=LinkedList()
-a.addNodeH(x)
-a.addNodeE(y)
-a.addNodeE(z)
-a.printList()
