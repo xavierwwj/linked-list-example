@@ -6,7 +6,7 @@ line = f.read()
 table = str.maketrans(string.punctuation, "                                ")
 newline = line.translate(table).lower()
 
-def getWordList(line): 
+def getWordList(line):                                  # O(n)
     wordList = LinkedList()
     temp = ''
     for char in line:
@@ -18,13 +18,13 @@ def getWordList(line):
                 temp = ''
     return wordList
 
-def getNumList(line):
+def getNumList(line):                                   # O(n)
     numList = LinkedList()
     for num in line:
         numList.addNodeE(Node(num))
     return numList
 
-def mergeSort(lt):
+def mergeSort(lt):                                      # O(nlogn)
     if lt.len < 2:
         return lt
     elif lt.len == 2:
@@ -41,7 +41,7 @@ def mergeSort(lt):
         sorted_b = mergeSort(b)
         return sortedMerge(sorted_a,sorted_b)
 
-def divideList(lt):
+def divideList(lt):                                     # O(len(lt)/2)
     half_index = int(lt.len/2.0)
     a = LinkedList()
     for i in range(half_index):
@@ -49,7 +49,7 @@ def divideList(lt):
         lt.delNodeH()
     return a, lt
 
-def sortedMerge(a,b):
+def sortedMerge(a,b):                                   # O(len(a)+len(b))                                  
     sorted_list = LinkedList()
     while a.len !=0 and b.len !=0:
         if a.head.val < b.head.val:
@@ -59,13 +59,9 @@ def sortedMerge(a,b):
             sorted_list.addNodeE(Node(b.head.val))
             b.delNodeH()
     if a.len == 0:
-        while b.len != 0:
-            sorted_list.addNodeE(Node(b.head.val))
-            b.delNodeH()
+        sorted_list.addNodeE(b.head)
     else:
-        while a.len != 0:
-            sorted_list.addNodeE(Node(a.head.val))
-            a.delNodeH()
+        sorted_list.addNodeE(a.head)
     return sorted_list
 
 x = getWordList(newline)
