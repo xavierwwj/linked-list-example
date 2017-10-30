@@ -68,8 +68,8 @@ class DoublyLinkedList():
                     temp = current.next
                     current.setNext(node)
                     node.setPrev(current)
-                    node.setNext(temp)
                     if temp != None:
+                        node.setNext(temp)
                         temp.setPrev(node)
                     else:
                         self.end = node
@@ -94,8 +94,8 @@ class DoublyLinkedList():
                     temp = current.prev
                     current.setPrev(node)
                     node.setNext(current)
-                    node.setPrev(temp)
                     if temp != None:
+                        node.setPrev(temp)
                         temp.setNext(node)
                     else:
                         self.head = node
