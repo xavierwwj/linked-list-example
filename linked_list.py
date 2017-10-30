@@ -10,7 +10,6 @@ class Node():
 
     # Set next node's link
     def setNext(self,next_node):        ## O(1)
-        assert isinstance(next_node, Node)
         self.next = next_node
 
 class LinkedList():
@@ -51,21 +50,23 @@ class LinkedList():
         assert isinstance(location, int)
         current = self.head
         while True:
-            if current.val == location:
+            if current == None:
+                print("Element not found.")
+                break
+            elif current.val == location:
                 temp = current.next
                 current.next = node
                 node.next = temp
                 self.len += 1
-                break
-            elif current.val == None:
-                print("Element not found.")
                 break
             else:
                 current = current.next
 
     def delNodeH(self):                 ## O(1)
         if self.head != None:
+            temp = self.head
             self.head = self.head.next
+            temp.setNext(None)
             self.len -= 1
         else:
             print ("Empty List")
@@ -89,11 +90,19 @@ class LinkedList():
                     break
                 elif current.val == location:
                     if current == self.head:
+                        temp = self.head
                         self.head = self.head.next
+                        temp.setNext(None)
+                        self.len -= 1
+                        break
+                    elif current == self.end:
+                        prev.next = None
+                        self.end = prev
                         self.len -= 1
                         break
                     else:
                         prev.next = current.next
+                        current.setNext(None)
                         self.len -= 1
                         break
                 else:
